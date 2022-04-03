@@ -38,11 +38,11 @@ type Stringy interface {
 }
 
 // HaveCap is the set of types that have dynamic capacity accessed with cap().
-type HaveCap interface {
-	~[]any | ~chan any
+type HaveCap[T any] interface {
+	~[]T | ~chan T | ~<-chan T | ~chan<- T
 }
 
 // HaveLen is the set of types that have dynamic length accessed with len().
-type HaveLen interface {
-	HaveCap | ~string | ~map[any]any
+type HaveLen[T any, K comparable] interface {
+	HaveCap[T] | ~string | ~map[K]T
 }
