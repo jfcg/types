@@ -1,4 +1,4 @@
-/*	Copyright (c) 2022, Serhat Şevki Dinçer.
+/*	Copyright (c) 2022-present, Serhat Şevki Dinçer.
 	This Source Code Form is subject to the terms of the Mozilla Public
 	License, v. 2.0. If a copy of the MPL was not distributed with this
 	file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -45,4 +45,15 @@ type HaveCap[T any] interface {
 // HaveLen is the set of types that have dynamic length accessed with len().
 type HaveLen[T any, K comparable] interface {
 	HaveCap[T] | ~string | ~map[K]T
+}
+
+// HaveLess is the set of types that implement Less(T) method
+type HaveLess[T any] interface {
+	Less(T) bool // strict comparison like < or >
+}
+
+// HaveLessPtr is the set of pointer types that implement (*T).Less(*T) method
+type HaveLessPtr[T any] interface {
+	*T
+	HaveLess[*T]
 }
