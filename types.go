@@ -53,7 +53,7 @@ type HaveLess[T any] interface {
 }
 
 // HaveLessPtr is the set of pointer types that implement (*T).Less(*T) method
-type HaveLessPtr[T any] interface {
+type HaveLessPtr[T any, P *T] interface {
 	*T
-	HaveLess[*T]
+	HaveLess[P]
 }
